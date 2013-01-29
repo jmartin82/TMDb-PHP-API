@@ -794,6 +794,11 @@ class TMDb
 			{
 				unset($params['language']);
 			}
+			
+			if(isset($params['include_adult']))
+			{
+				$params['include_adult'] = ($params['include_adult'] ? 'true' : 'false');
+			}
 
 			$url .= ( ! empty($params)) ? '&'.http_build_query($params, '', '&') : '';
 		}
