@@ -12,6 +12,8 @@
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  */
 
+namespace TMDb;
+
 class TMDb
 {
 	const POST = 'post';
@@ -439,7 +441,7 @@ class TMDb
 		$params = array(
 			'page' => (int) $page,
 			'start_date' => $start_date,
-			'start_date' => $end_date,
+			'end_date' => $end_date,
 		);
 		return $this->_makeCall('person/changes', $params);
 	}
@@ -951,6 +953,6 @@ class TMDb
  *
  * @author Jonas De Smet - Glamorous
  */
-class TMDbException extends Exception{}
+class TMDbException extends \Exception{}
 
 ?>
