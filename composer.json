@@ -1,5 +1,6 @@
 {
-    "name": "lordotter/TMDb-PHP-API",
+    "name": "lordotter/tmdb-php-api
+    ",
     "description": "A PHP 5.3 library for scraping TMDb.",
     "keywords": ["tmdb"],
     "licence": "",
