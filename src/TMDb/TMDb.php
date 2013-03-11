@@ -720,6 +720,11 @@ class TMDb
 		if(isset($config['images']))
 		{
 			$base_url = $config['images']['base_url'];
+
+            if ($this->_apischeme === self::API_SCHEME_SSL) {
+                $base_url = preg_replace("/^http:/", "https:", $base_url);
+            }
+
 			$available_sizes = $this->getAvailableImageSizes($imagetype);
 
 			if(in_array($size, $available_sizes))
