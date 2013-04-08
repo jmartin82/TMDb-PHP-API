@@ -28,6 +28,14 @@ class TMDb
 	const API_SCHEME_SSL = 'https://';
 
 	const VERSION = '1.5.0';
+		
+	// Request limitation
+	// http://help.themoviedb.org/kb/general/api-request-limits
+	//  30 requests every 10 seconds per IP
+	// http://www.themoviedb.org/talk/512921ea19c2951d8124fb17
+	//  4 requests every 1 second per IP
+	const REQUEST_LIMIT = 4;
+	const REQUEST_TIMESPAN = 1.0;
 
 	/**
 	 * The API-key
@@ -65,6 +73,34 @@ class TMDb
 	protected $_apischeme;
 
 	/**
+	 * Request counter
+	 *
+	 * @var integer
+	 */
+	protected $_requests = 0;
+
+	/**
+	 * Array of request timestamps
+	 *
+	 * @var array of double values
+	 */
+	protected $_timestamps;
+	
+	/**
+	 * Oldest timestamp for debugging only
+	 *
+	 * @var double value
+	 */
+	protected $_timestamp;
+
+	/**
+	 * Retry counter
+	 *
+	 * @var integer
+	 */
+	protected $_retries = 0;
+	
+	/**
 	 * Default constructor
 	 *
 	 * @param string $apikey			API-key recieved from TMDb
@@ -74,6 +110,8 @@ class TMDb
 	 */
 	public function __construct($apikey, $default_lang = 'en', $config = FALSE, $scheme = TMDb::API_SCHEME)
 	{
+		$this->_timestamps = array_fill(0, TMDB::REQUEST_LIMIT, 0.0);
+		
 		$this->_apikey = (string) $apikey;
 		$this->_apischeme = ($scheme == TMDb::API_SCHEME) ? TMDb::API_SCHEME : TMDb::API_SCHEME_SSL;
 		$this->setLang($default_lang);
@@ -82,6 +120,36 @@ class TMDb
 		{
 			$this->getConfiguration();
 		}
+	}
+
+	/**
+	 * Increment request counter and handle request limitation
+	 *
+	 * @return void
+	 */
+	protected function incRequests(){
+		
+		/* Increment request counter */
+		$this->_requests += 1;
+		
+		/* Calculate index for the oldest timestamp in the timestamps array */
+		$idx = $this->_requests % TMDB::REQUEST_LIMIT;
+		
+		/* Save the oldest timestamp for debugging */
+		$this->_timestamp = $this->_timestamps[ $idx ];
+		
+		/* Calculate elapsed time */
+		$timediff = microtime(true) - $this->_timestamp;
+		//$timediff = ( floor(microtime(true)*10) - ceil($this->_timestamp*10) ) / 10;
+
+		/* Compare the elapsed time against the specified timespan */
+		if ( $timediff < TMDB::REQUEST_TIMESPAN ){
+			/* Calculate delay * 1 second and sleep */
+			usleep( (TMDB::REQUEST_TIMESPAN - $timediff) *1000000 );  
+		}
+		
+		/* Save new timestamp */
+		$this->_timestamps[ $idx ] = microtime(true);
 	}
 
 	/**
@@ -827,18 +895,33 @@ class TMDb
 			curl_setopt($ch, CURLOPT_HEADER, 1);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
+			$this->incRequests();
 			$response = curl_exec($ch);
 
 			$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 			$header = substr($response, 0, $header_size);
 			$body = substr($response, $header_size);
 
+			$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 			$error_number = curl_errno($ch);
 			$error_message = curl_error($ch);
 
+			
+			if($http_status == 503 or $http_status == 0)
+			{
+				if ( $this->_retries < 3 )
+				{
+					$this->_retries += 1;
+					usleep( 10 *1000*1000 );
+					return $this->_makeCall($function, $params, $session_id, $method);
+				}
+			}
+			$this->_retries = 0;
+			
+
 			if($error_number > 0)
 			{
-				throw new TMDbException('Method failed: '.$function.' - '.$error_message);
+				throw new TMDbException('Method failed: '.$function.' - HTTP Status '.$http_status.' Curl Errno '.$error_number.' Curl Error '.$error_message);
 			}
 
 			curl_close($ch);
