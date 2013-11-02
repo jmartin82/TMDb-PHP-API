@@ -46,7 +46,7 @@ All methods are listed here, for use, look into the code, everything is document
 - getPopularMovies([$page], [$lang])
 - getUpcomingMovies([$page], [$lang])
 - getNowPlayingMovies([$page], [$lang])
-- getSimularMovies($id, [$page], [$lang])
+- getSimilarMovies($id, [$page], [$lang])
 - getChangedMovies([$page], [$start_date], [$end_date])
 - getMovieChanges($id)
 
