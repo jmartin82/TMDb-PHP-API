@@ -28,6 +28,11 @@ All methods are listed here, for use, look into the code, everything is document
 - getGenres([$lang])
 - getMoviesByGenre($id, [$page], [$lang])
 
+### Movies & TV Series ###
+
+- getTopRated([$page], [$type], [$lang])
+- getPopular([$page], [$type], [$lang])
+
 ### Movies ###
 
 - searchMovie($query, [$page], [$adult], [$lang])
@@ -42,19 +47,28 @@ All methods are listed here, for use, look into the code, everything is document
 - getMoviesByCompany($id, [$page], [$lang])
 - getMoviesByGenre($id, [$page], [$lang])
 - getLatestMovie()
-- getTopRatedMovies([$page], [$lang])
-- getPopularMovies([$page], [$lang])
 - getUpcomingMovies([$page], [$lang])
 - getNowPlayingMovies([$page], [$lang])
 - getSimularMovies($id, [$page], [$lang])
 - getChangedMovies([$page], [$start_date], [$end_date])
 - getMovieChanges($id)
 
+### TV Series ###
+
+- searchTV($query, [$page], [$air_date_year], [$lang])
+- getTV[$id, [$lang])
+- getTVSeason[$id, $season_id, [$lang])
+- getTVSeasonCredits[$id, $season_id, [$lang])
+- getTVSeasonImages[$id, $season_id, [$lang])
+- getTVEpisode[$id, $episode_id, [$lang])
+- getTVEpisodeCredits[$id, $episode_id, [$lang])
+- getTVEpisodeImages[$id, $episode_id, [$lang])
+
 ### Persons ###
 
 - searchPerson($query, [$page], [$adult])
 - getPerson($id)
-- getPersonCredits($id, [$lang])
+- getPersonCredits($id, [$type], [$lang])
 - getPersonImages($id)
 - getChangedPersons([$page], [$start_date], [$end_date])
 - getPersonChanges($id)
@@ -184,6 +198,20 @@ With the new version of the API (v3) there's support for SSL. This class support
 It's always possible to find some issues. If you find one, please inform us with the issue tracker on [github](http://github.com/glamorous/TMDb-PHP-API/issues). Please don't use this to ask question how to use this class. It's straight forward and easy to understand for everyone with a basic knowledge of PHP.
 
 ## Changelog ##
+
+**TMDb 1.6.0 - 05/11/2013**
+
+- [improvement] Updated method for retreiving top rated content. Now supports a type (movie or tv): `getTopRated`
+- [improvement] Updated method for retreiving popular content. Now supports a type (movie or tv): `getPopular`
+- [improvement] Updated method for retreiving a person's credits. Now supports a type (combined, movie or tv): `getPersonCredits`
+- [feature] New method for searching TV shows: `searchTV`
+- [feature] New method for retrieving a TV show: `getTV`
+- [feature] New method for retrieving a TV show season: `getTVSeason`
+- [feature] New method for retrieving a TV show season credits: `getTVSeasonCredits`
+- [feature] New method for retrieving a TV show season images: `getTVSeasonImages`
+- [feature] New method for retrieving a TV show episode: `getTVEpisode`
+- [feature] New method for retrieving a TV show episode credits: `getTVEpisodeCredits`
+- [feature] New method for retrieving a TV show episode images: `getTVEpisodeImages`
 
 **TMDb 1.5.1 - 16/11/2012**
 
