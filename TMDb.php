@@ -248,7 +248,7 @@ class TMDb
      * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
      * @return TMDb result array
      */
-    public function getTVEpisode($id, $season_id, $episode_id, $lang = NULL)
+    public function getTVEpisodeCredits($id, $season_id, $episode_id, $lang = NULL)
     {
         $params = array(
             'language' => ($lang !== NULL) ? $lang : $this->getLang(),
@@ -265,7 +265,7 @@ class TMDb
      * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
      * @return TMDb result array
      */
-    public function getTVEpisode($id, $season_id, $episode_id, $lang = NULL)
+    public function getTVEpisodeImages($id, $season_id, $episode_id, $lang = NULL)
     {
         $params = array(
             'language' => ($lang !== NULL) ? $lang : $this->getLang(),
