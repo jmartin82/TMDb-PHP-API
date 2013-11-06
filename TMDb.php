@@ -106,24 +106,24 @@ class TMDb
 	}
 
 	/**
-     * Search a tv show by querystring
-     *
-     * @param string $text              Query to search after in the TMDb database
-     * @param int $page                 Number of the page with results (default first page)
-     * @param bool $air_date_year       Filter results that have air date with value (default NULL)
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function searchTV($query, $page = 1, $air_date_year = NULL, $lang = NULL)
-    {
-        $params = array(
-            'query' => $query,
-            'page' => (int) $page,
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-            'air_date_year' => $air_date_year
-        );
-        return $this->_makeCall('search/tv', $params);
-    }
+	 * Search a tv show by querystring
+	 *
+	 * @param string $text              Query to search after in the TMDb database
+	 * @param int $page                 Number of the page with results (default first page)
+	 * @param bool $air_date_year       Filter results that have air date with value (default NULL)
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function searchTV($query, $page = 1, $air_date_year = NULL, $lang = NULL)
+	{
+		$params = array(
+			'query' => $query,
+			'page' => (int) $page,
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+			'air_date_year' => $air_date_year
+		);
+		return $this->_makeCall('search/tv', $params);
+	}
 
 	/**
 	 * Search a person by querystring
@@ -160,118 +160,118 @@ class TMDb
 	}
 
 	/**
-     * Retrieve all basic information for a particular tv show
-     *
-     * @param mixed $id                 TMDb-id or IMDB-id
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getTV($id, $lang = NULL)
-    {
-        $params = array(
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall('tv/'.$id, $params);
-    }
+	 * Retrieve all basic information for a particular tv show
+	 *
+	 * @param mixed $id                 TMDb-id or IMDB-id
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTV($id, $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/'.$id, $params);
+	}
 
-    /**
-     * Retrieve all basic information for a particular tv show season
-     *
-     * @param mixed $id                 TMDb-id or IMDB-id
-     * @param int $season_id            Season Id to query
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getTVSeason($id, $season_id, $lang = NULL)
-    {
-        $params = array(
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall('tv/'.$id.'/season/'.$season_id, $params);
-    }
+	/**
+	 * Retrieve all basic information for a particular tv show season
+	 *
+	 * @param mixed $id                 TMDb-id or IMDB-id
+	 * @param int $season_id            Season Id to query
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTVSeason($id, $season_id, $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/'.$id.'/season/'.$season_id, $params);
+	}
 
-    /**
-     * Retrieve cast and credits for a particular tv show season
-     *
-     * @param mixed $id                 TMDb-id or IMDB-id
-     * @param int $season_id            Season Id to query
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getTVSeasonCredits($id, $season_id, $lang = NULL)
-    {
-        $params = array(
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/credits', $params);
-    }
+	/**
+	 * Retrieve cast and credits for a particular tv show season
+	 *
+	 * @param mixed $id                 TMDb-id or IMDB-id
+	 * @param int $season_id            Season Id to query
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTVSeasonCredits($id, $season_id, $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/credits', $params);
+	}
 
-    /**
-     * Retrieve images for a particular tv show season
-     *
-     * @param mixed $id                 TMDb-id or IMDB-id
-     * @param int $season_id            Season Id to query
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getTVSeasonImages($id, $season_id, $lang = NULL)
-    {
-        $params = array(
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/images', $params);
-    }
+	/**
+	 * Retrieve images for a particular tv show season
+	 *
+	 * @param mixed $id                 TMDb-id or IMDB-id
+	 * @param int $season_id            Season Id to query
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTVSeasonImages($id, $season_id, $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/images', $params);
+	}
 
-    /**
-     * Retrieve all basic information for a particular tv show episode
-     *
-     * @param mixed $id                 TMDb-id or IMDB-id
-     * @param int $season_id            Season Id to query
-     * @param int $episode_id           Episode Id to query
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getTVEpisode($id, $season_id, $episode_id, $lang = NULL)
-    {
-        $params = array(
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/episode/'.$episode_id, $params);
-    }
+	/**
+	 * Retrieve all basic information for a particular tv show episode
+	 *
+	 * @param mixed $id                 TMDb-id or IMDB-id
+	 * @param int $season_id            Season Id to query
+	 * @param int $episode_id           Episode Id to query
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTVEpisode($id, $season_id, $episode_id, $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/episode/'.$episode_id, $params);
+	}
 
-    /**
-     * Retrieve cast and credits for a particular tv show episode
-     *
-     * @param mixed $id                 TMDb-id or IMDB-id
-     * @param int $season_id            Season Id to query
-     * @param int $episode_id           Episode Id to query
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getTVEpisodeCredits($id, $season_id, $episode_id, $lang = NULL)
-    {
-        $params = array(
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/episode/'.$episode_id.'/credits', $params);
-    }
+	/**
+	 * Retrieve cast and credits for a particular tv show episode
+	 *
+	 * @param mixed $id                 TMDb-id or IMDB-id
+	 * @param int $season_id            Season Id to query
+	 * @param int $episode_id           Episode Id to query
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTVEpisodeCredits($id, $season_id, $episode_id, $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/episode/'.$episode_id.'/credits', $params);
+	}
 
-    /**
-     * Retrieve images for a particular tv show episode
-     *
-     * @param mixed $id                 TMDb-id or IMDB-id
-     * @param int $season_id            Season Id to query
-     * @param int $episode_id           Episode Id to query
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getTVEpisodeImages($id, $season_id, $episode_id, $lang = NULL)
-    {
-        $params = array(
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/episode/'.$episode_id.'/images', $params);
-    }
+	/**
+	 * Retrieve images for a particular tv show episode
+	 *
+	 * @param mixed $id                 TMDb-id or IMDB-id
+	 * @param int $season_id            Season Id to query
+	 * @param int $episode_id           Episode Id to query
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTVEpisodeImages($id, $season_id, $episode_id, $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/episode/'.$episode_id.'/images', $params);
+	}
 
 	/**
 	 * Retrieve information about a collection
@@ -452,38 +452,38 @@ class TMDb
 	}
 
 	/**
-     * Retrieve popular content (list is updated daily)
-     *
-     * @param string $type              Type of content to search ('movie' or 'tv'; default movie)
-     * @param int $page                 Number of the page with results (default first page)
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getPopular($type = 'movie', $page = 1, $lang = NULL)
-    {
-        $params = array(
-            'page' => (int) $page,
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall($type.'/popular', $params);
-    }
+	 * Retrieve popular content (list is updated daily)
+	 *
+	 * @param string $type              Type of content to search ('movie' or 'tv'; default movie)
+	 * @param int $page                 Number of the page with results (default first page)
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getPopular($type = 'movie', $page = 1, $lang = NULL)
+	{
+		$params = array(
+			'page' => (int) $page,
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall($type.'/popular', $params);
+	}
 
-    /**
-     * Retrieve top-rated content
-     *
-     * @param string $type              Type of content to search ('movie' or 'tv'; default movie)
-     * @param int $page                 Number of the page with results (default first page)
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getTopRated($type = 'movie', $page = 1, $lang = NULL)
-    {
-        $params = array(
-            'page' => (int) $page,
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall($type.'/top_rated', $params);
-    }
+	/**
+	 * Retrieve top-rated content
+	 *
+	 * @param string $type              Type of content to search ('movie' or 'tv'; default movie)
+	 * @param int $page                 Number of the page with results (default first page)
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTopRated($type = 'movie', $page = 1, $lang = NULL)
+	{
+		$params = array(
+			'page' => (int) $page,
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall($type.'/top_rated', $params);
+	}
 
 	/**
 	 * Retrieve changes for a particular movie
@@ -526,20 +526,20 @@ class TMDb
 	}
 
 	/**
-     * Retrieve all cast and crew information for a particular person
-     *
-     * @param int $id                   TMDb person-id
-     * @param string $type              Type of content to search ('combined', movie' or 'tv'; default combined)
-     * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
-     * @return TMDb result array
-     */
-    public function getPersonCredits($id, $type = 'combined', $lang = NULL)
-    {
-        $params = array(
-            'language' => ($lang !== NULL) ? $lang : $this->getLang(),
-        );
-        return $this->_makeCall('person/'.$id.'/'.$type.'_credits', $params);
-    }
+	 * Retrieve all cast and crew information for a particular person
+	 *
+	 * @param int $id                   TMDb person-id
+	 * @param string $type              Type of content to search ('combined', movie' or 'tv'; default combined)
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getPersonCredits($id, $type = 'combined', $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('person/'.$id.'/'.$type.'_credits', $params);
+	}
 
 	/**
 	 * Retrieve all images for a particular person
