@@ -173,7 +173,7 @@ class TMDb
 	 * Retrieve alternative titles for a particular movie
 	 *
 	 * @param mixed $id					TMDb-id or IMDB-id
-	 * @params string $country			Only include titles for a particular country (ISO 3166-1)
+	 * @param string $country			Only include titles for a particular country (ISO 3166-1)
 	 * @return TMDb result array
 	 */
 	public function getMovieTitles($id, $country = NULL)
@@ -182,6 +182,19 @@ class TMDb
 			'country' => $country,
 		);
 		return $this->_makeCall('movie/'.$id.'/alternative_titles', $params);
+	}
+
+	/**
+	 * Retrieve all of the movie crew information for a particular movie.
+	 *
+	 * @see http://docs.themoviedb.apiary.io/#movies
+	 *
+	 * @param mixed $id					TMDb-id or IMDB-id
+	 * @return array TMDb result
+	 */
+	public function getMovieCredits($id)
+	{
+		return $this->_makeCall('movie/'.$id.'/credits');
 	}
 
 	/**
