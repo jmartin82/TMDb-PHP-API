@@ -185,6 +185,10 @@ It's always possible to find some issues. If you find one, please inform us with
 
 ## Changelog ##
 
+**TMDb 1.5.2 - 09/04/2013**
+
+- [feature] Added a request limitation handling with a retry mechanism. Thanks to the github user [betonme](https://github.com/betonme). Closed issue [#17](https://github.com/glamorous/TMDb-PHP-API/issues/17).
+
 **TMDb 1.5.1 - 16/11/2012**
 
 - [bug] getPersonCredits wasn't working the correct way. Thanks to the github user [caa007](https://github.com/caa007). Closed issue [#11](https://github.com/glamorous/TMDb-PHP-API/issues/11).
