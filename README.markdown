@@ -199,6 +199,10 @@ It's always possible to find some issues. If you find one, please inform us with
 
 ## Changelog ##
 
+**TMDb 1.6.1 - 20/11/2013**
+
+- [feature] New method for retrieving movie credits: `getMovieCredits`
+
 **TMDb 1.6.0 - 05/11/2013**
 
 - [improvement] Updated method for retreiving top rated content. Now supports a type (movie or tv): `getTopRated`
