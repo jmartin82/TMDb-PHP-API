@@ -152,6 +152,21 @@ class TMDb
 		/* Save new timestamp */
 		$this->_timestamps[ $idx ] = microtime(true);
 	}
+	
+	/**
+	 * Do find
+	 *
+	 * @param int $id					IMDB-id
+	 * @return TMDb search result array
+	 */
+	public function find($id)
+	{
+		$params = array(
+			'external_source' => 'imdb_id',
+			'language' => $this->getLang(),
+		);
+		return $this->_makeCall('find/'.$id, $params);
+	}
 
 	/**
 	 * Search a movie by querystring
