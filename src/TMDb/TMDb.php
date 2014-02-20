@@ -322,6 +322,25 @@ class TMDb
 		);
 		return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/episode/'.$episode_id, $params);
 	}
+	
+
+	/**
+	 * Get the external ids for a TV episode by comabination of a season and episode number.
+	 *
+	 * @param mixed $id                 TMDb-id or IMDB-id
+	 * @param int $season_id            Season Id to query
+	 * @param int $episode_id           Episode Id to query
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTVEpisodeExternalIds($id, $season_id, $episode_id, $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/episode/'.$episode_id.'/external_ids', $params);
+	}
+
 
 	/**
 	 * Retrieve cast and credits for a particular tv show episode
