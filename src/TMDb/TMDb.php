@@ -375,6 +375,22 @@ class TMDb
 		);
 		return $this->_makeCall('tv/'.$id.'/season/'.$season_id.'/episode/'.$episode_id.'/images', $params);
 	}
+	
+	 /**
+	 * Retrieve TV arriving within the next few weeks
+	 *
+	 * @param int $page					Number of the page with results (default first page)
+	 * @param mixed $lang				Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getOnTheAir($page = 1, $lang = NULL)
+	{
+		$params = array(
+			'page' => (int) $page,
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/on_the_air',$params);
+	}
 
 	/**
 	 * Retrieve information about a collection
