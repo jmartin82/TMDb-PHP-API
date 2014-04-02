@@ -257,6 +257,22 @@ class TMDb
 		);
 		return $this->_makeCall('tv/'.$id, $params);
 	}
+	
+	/**
+	 *  Get the external ids for a TV
+	 *
+	 * @param mixed $id                 TMDb-id or IMDB-id
+	 * @param mixed $lang               Filter the result with a language (ISO 3166-1) other then default, use FALSE to retrieve results from all languages
+	 * @return TMDb result array
+	 */
+	public function getTVExternalIds($id, $lang = NULL)
+	{
+		$params = array(
+			'language' => ($lang !== NULL) ? $lang : $this->getLang(),
+		);
+		return $this->_makeCall('tv/'.$id.'/external_ids', $params);
+	}
+
 
 	/**
 	 * Retrieve all basic information for a particular tv show season
