@@ -465,6 +465,20 @@ class TMDb
 	{
 		return $this->_makeCall('movie/'.$id.'/credits');
 	}
+	
+	
+	/**
+	 * Retrieve all of the crew information for a particular crew.
+	 *
+	 * @see http://docs.themoviedb.apiary.io/#tv
+	 *
+	 * @param mixed $id					TMDb-id or IMDB-id
+	 * @return array TMDb result
+	 */
+	public function getTvCredits($id)
+	{
+		return $this->_makeCall('tv/'.$id.'/credits');
+	}
 
 	/**
 	 * Retrieve all of the movie cast information for a particular movie
